@@ -7,7 +7,7 @@
     "build": "rollup --config --name %npm_package_outputname%",
     "serve": "http-server ./dist/"
   },
-  "outputname": "App",
+  "outputname": "Juicy",
   "author": "",
   "license": "ISC",
   "devDependencies": {
