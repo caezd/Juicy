@@ -1,5 +1,4 @@
 import doT from './doT.js';
-import Fetcher from "../../Helpers/Fetcher.js";
 
 var Component = function (elem, options) {
 
