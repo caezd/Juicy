@@ -105,15 +105,16 @@ Component.prototype.parseVariables = function (v) {
         case 'field':
             return {
                 field: {
-                    label: children[0].innerText.replace(/:/, '').trim(),
+                    label: this.trimLabels(children[0].innerText),
                     value: children[1].firstChild.innerHTML
                 }
             };
         case 'contact':
+            let value = this.queryable(children[1]).querySelector('a');
             return {
                 contact: {
-                    label: children[0].innerText.replace(/:/, '').trim(),
-                    value: children[1].firstChild.innerHTML
+                    label: this.trimLabels(children[0].innerText),
+                    value: value ? value.outerHTML : ''
                 }
             };
         case 'award':
@@ -155,6 +156,18 @@ Component.prototype.parseVariables = function (v) {
 
     return {};
 };
+
+Component.prototype.queryable = function(collection) {
+    let fragment = new DocumentFragment();
+    let div = document.createElement('div');
+    div.innerHTML = collection.innerHTML;
+    fragment.appendChild(div);
+    return fragment;
+}
+
+Component.prototype.trimLabels = function (text) {
+    return text.replace(/:/, '').trim();
+}
 
 Component.prototype.render = function () {
 
