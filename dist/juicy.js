@@ -89,6 +89,16 @@ var Juicy = (function () {
   function unescape(code) {
     return code.replace(/\\('|\\)/g, "$1").replace(/[\r\t\n]/g, " ")
   }
+  
+  function testCode(code) {
+    try {
+      if(code) return code;
+    } catch(e) { 
+      return ''; 
+    } finally { 
+      return code;
+    }
+  }
 
   function template(tmpl, c, def) {
     const ds = c && c.delimiters;
@@ -109,7 +119,7 @@ var Juicy = (function () {
         : str
       )
         .replace(/'|\\/g, "\\$&")
-        .replace(syn.interpolate, (_, code) => `'+(${unescape(code || '')})+'`)
+        .replace(syn.interpolate, (_, code) => `'+(${testCode(unescape(code))})+'`)
         .replace(syn.typeInterpolate, (_, typ, code) => {
           sid++;
           const val = c.internalPrefix + sid;
