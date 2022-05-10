@@ -109,7 +109,7 @@ var Juicy = (function () {
         : str
       )
         .replace(/'|\\/g, "\\$&")
-        .replace(syn.interpolate, (_, code) => `'+(${unescape(code)})+'`)
+        .replace(syn.interpolate, (_, code) => `'+(${unescape(code || '')})+'`)
         .replace(syn.typeInterpolate, (_, typ, code) => {
           sid++;
           const val = c.internalPrefix + sid;
