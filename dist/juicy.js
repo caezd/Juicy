@@ -296,84 +296,14 @@ var Juicy = (function () {
             })(v));
         });
 
-<<<<<<< HEAD
         /*
         this.parseVars()
         */
-=======
-  function unescape(code) {
-    return code.replace(/\\('|\\)/g, "$1").replace(/[\r\t\n]/g, " ")
-  }
-  
-  function testCode(code) {
-    try {
-      if(code) return code;
-    } catch(e) { 
-      return ''; 
-    } finally { 
-      return code;
-    }
-  }
->>>>>>> 7e463684ccd9ba1a49f29cb150c77c440da4af29
 
         console.log(obj);
         return obj;
     };
 
-<<<<<<< HEAD
-=======
-    str = (
-      "let out='" +
-      (c.strip
-        ? str
-            .trim()
-            .replace(/[\t ]+(\r|\n)/g, "\n") // remove trailing spaces
-            .replace(/(\r|\n)[\t ]+/g, " ") // leading spaces reduced to " "
-            .replace(/\r|\n|\t|\/\*[\s\S]*?\*\//g, "") // remove breaks, tabs and JS comments
-        : str
-      )
-        .replace(/'|\\/g, "\\$&")
-        .replace(syn.interpolate, (_, code) => `'+(${unescape(testCode(code))})+'`)
-        .replace(syn.typeInterpolate, (_, typ, code) => {
-          sid++;
-          const val = c.internalPrefix + sid;
-          const error = `throw new Error("expected ${TYPES[typ]}, got "+ (typeof ${val}))`;
-          return `';const ${val}=(${unescape(code)});if(typeof ${val}!=="${
-          TYPES[typ]
-        }") ${error};out+=${val}+'`
-        })
-        .replace(syn.encode, (_, enc = "", code) => {
-          needEncoders[enc] = true;
-          code = unescape(code);
-          const e = c.selfContained ? enc : enc ? "." + enc : '[""]';
-          return `'+${c.encodersPrefix}${e}(${code})+'`
-        })
-        .replace(syn.conditional, (_, elseCase, code) => {
-          if (code) {
-            code = unescape(code);
-            return elseCase ? `';}else if(${code}){out+='` : `';if(${code}){out+='`
-          }
-          return elseCase ? "';}else{out+='" : "';}out+='"
-        })
-        .replace(syn.iterate, (_, arr, vName, iName) => {
-          if (!arr) return "';} } out+='"
-          sid++;
-          const defI = iName ? `let ${iName}=-1;` : "";
-          const incI = iName ? `${iName}++;` : "";
-          const val = c.internalPrefix + sid;
-          return `';const ${val}=${unescape(
-          arr
-        )};if(${val}){${defI}for (const ${vName} of ${val}){${incI}out+='`
-        })
-        .replace(syn.evaluate, (_, code) => `';${unescape(code)}out+='`) +
-      "';return out;"
-    )
-      .replace(/\n/g, "\\n")
-      .replace(/\t/g, "\\t")
-      .replace(/\r/g, "\\r")
-      .replace(/(\s|;|\}|^|\{)out\+='';/g, "$1")
-      .replace(/\+''/g, "");
->>>>>>> 7e463684ccd9ba1a49f29cb150c77c440da4af29
 
     Component.prototype.parseVariables = function (v) {
         let children = v.children;
