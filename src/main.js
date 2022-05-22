@@ -145,7 +145,7 @@ Component.prototype.parseVariables = function (v) {
         case 'rpg':
             return {
                 rpg: {
-                    label: children[0].innerText.trim(),
+                    label: this.trimLabels(children[0].innerText),
                     value: children[1].firstChild.innerHTML
                 }
             };
@@ -166,7 +166,7 @@ Component.prototype.queryable = function(collection) {
 }
 
 Component.prototype.trimLabels = function (text) {
-    return text.replace(/:/, '').trim();
+    return text.replace(/:|\*/, '').trim();
 }
 
 Component.prototype.render = function () {
