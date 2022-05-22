@@ -296,9 +296,25 @@ var Juicy = (function () {
             })(v));
         });
 
+<<<<<<< HEAD
         /*
         this.parseVars()
         */
+=======
+  function unescape(code) {
+    return code.replace(/\\('|\\)/g, "$1").replace(/[\r\t\n]/g, " ")
+  }
+  
+  function testCode(code) {
+    try {
+      if(code) return code;
+    } catch(e) { 
+      return ''; 
+    } finally { 
+      return code;
+    }
+  }
+>>>>>>> 7e463684ccd9ba1a49f29cb150c77c440da4af29
 
         console.log(obj);
         return obj;
